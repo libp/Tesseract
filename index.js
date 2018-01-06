@@ -1,7 +1,7 @@
 document.write('Hello world');
 require('./css/style.css');
 
-var Tesseract = require('tesseract.js')
+var Tesseract = require('tesseract.js');
 
 // Tesseract.recognize("./img/a.png", {
 //     lang: "eng",
@@ -31,15 +31,33 @@ $(function() {
         imgData.data[i+2]=255-imgData.data[i+2];
         imgData.data[i+3]=255;
     }
-
-    ctx.clearRect(0,0,ctx.width,ctx.height)
+    //只留黑白两色
+    for (var i=0;i<imgData.data.length;i+=4)
+    {
+        if(imgData.data[i]<220||imgData.data[i+1]<220&&imgData.data[i+2]<220){
+            imgData.data[i]=imgData.data[i+1]=imgData.data[i+2]=0;
+            imgData.data[i+3]=255;
+        }
+    }
+    ctx.clearRect(0,0,ctx.width,ctx.height);
     ctx.putImageData(imgData,0,0);
 
-    //灰度转换算法
-    // for (var i=0;i<imgData.data.length;i+=4)
-    // {
-    //     imgData.data[i]=imgData.data[i+1]=imgData.data[i+2]=imgData.data[i+3]=(imgData.data[i] * 299 + imgData.data[i+1] * 587 + imgData.data[i+2] * 114) / 1000;
-    // }
+    var imgData2=ctx.getImageData(4,4,image_data.width-8,image_data.height-8);
+    ctx.putImageData(imgData2,4,250);
+
+    //获取验证码
+    var vc = 'abcd';
+    Tesseract.recognize(imgData2, {
+        lang: "eng",
+        classify_bln_numeric_mode: 1
+    }).then(function (result) {
+        console.log(result);
+        console.log(result.text);
+        vc = result.text;
+    });
+
+
+
 
 
 });
