@@ -1,0 +1,18 @@
+{
+  "name": "解决验证码",
+  "description" : "用于自动录入平台登录验证码",
+  "version": "1.0",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab"
+  ],
+  "background": {
+    "scripts": ["jquery-3.2.1.min.js","background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "解决验证码"
+  }
+
+}

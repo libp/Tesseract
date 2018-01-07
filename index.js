@@ -1,16 +1,7 @@
 document.write('Hello world');
-require('./css/style.css');
+require('./app/css/style.css');
 
 var Tesseract = require('tesseract.js');
-
-// Tesseract.recognize("./img/a.png", {
-//     lang: "eng",
-//     classify_bln_numeric_mode: 1
-// }).then(function(result){
-//     console.log(result);
-//     console.log(result.text);
-// });
-
 
 
 /*等图片加载完成后再执行（若图片没有加载完成，则不能正常进行图片处理）*/

@@ -2,16 +2,19 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-
+const path = require('path');
 
 
 
 module.exports ={
     devtool: 'eval-source-map',
-    entry:'./index.js',
+    entry:{
+        'background.js': './app/background.js',
+
+    },
     output:{
-        path:__dirname+'/build',
-        filename:'bundle-[hash].js'
+        path:path.resolve(__dirname,'extension'),
+        filename: '[name]'
     },
     module:{
         loaders:[
@@ -29,8 +32,9 @@ module.exports ={
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin(),
         new ExtractTextPlugin("style.css"),
-        new CleanWebpackPlugin('build/*.*', {
+        new CleanWebpackPlugin('extension/', {
             root: __dirname,
+            exclude:['manifest.json','img/**/*'],
             verbose: true,
             dry: false
         })
