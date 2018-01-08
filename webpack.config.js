@@ -1,8 +1,10 @@
+"use strict";
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 
@@ -17,10 +19,13 @@ module.exports ={
         filename: '[name]'
     },
     module:{
-        loaders:[
+        rules: [
             {
-                test:/\.css$/,
-                loaders:['style-loader','css-loader']
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
             }
         ]
     },
@@ -34,9 +39,14 @@ module.exports ={
         new ExtractTextPlugin("style.css"),
         new CleanWebpackPlugin('extension/', {
             root: __dirname,
-            exclude:['manifest.json','img/**/*'],
             verbose: true,
             dry: false
-        })
+        }),
+        new CopyWebpackPlugin([
+            {
+                from: 'app',
+                ignore: ['*.js','*.html']
+            }
+        ])
     ]
 }

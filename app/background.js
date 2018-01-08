@@ -5,15 +5,10 @@
 // Called when the user clicks on the browser action.
 chrome.browserAction.onClicked.addListener(function(tab) {
     // No tabs or host permissions needed!
-    console.log('Turning ' + tab.url + ' red!');
-    test()
     chrome.tabs.executeScript({
         code: 'document.body.style.backgroundColor="red"',
-        code: 'document.getElementById("validateCode").value="ss"'
+        // code: 'document.getElementById("validateCode").value="ss"'
     });
 });
-function test(){
-    // alert($(".submit").val());
-    // $("#validateCode").val("ddd");
-}
+
 
