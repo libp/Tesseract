@@ -11,8 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports ={
     devtool: 'eval-source-map',
     entry:{
-        'background.js': './app/background.js',
-
+        'tesser.js': './app/tesser.js',
     },
     output:{
         path:path.resolve(__dirname,'extension'),
@@ -45,7 +44,7 @@ module.exports ={
         new CopyWebpackPlugin([
             {
                 from: 'app',
-                ignore: ['*.js','*.html']
+                ignore: ['tesser.js','index.tmpl.html']
             }
         ])
     ]
