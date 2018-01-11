@@ -49,17 +49,20 @@ $(function() {
         classify_bln_numeric_mode: 1
     }).then(function (result) {
         console.log(result.text);
-        vc = result.text.replace(/\s|\xA0/g,"");
+        vc = result.text.replace(/\s/g,'').trim();
         $('#institute').val('00010000');
         $('#validateCode').val(vc);
-        // console.table($(":submit"));
-        $(":submit")[0].click(function(){
-
-        });
+        console.log(new Date());
+        //增加一个延时操作，等待验证码完成输入后再点击
+        setTimeout(function (){clic(); },1000);
     });
 
 });
 
+function clic(){
+    console.log(new Date());
+    $(":submit")[0].click();
+};
 
 
 

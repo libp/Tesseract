@@ -18,13 +18,23 @@ module.exports ={
         filename: '[name]'
     },
     module:{
+        loaders: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            query:
+                {
+                    presets: ['es2015'],
+                    plugins: ['transform-runtime']
+                }
+        }],
         rules: [
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                })
+                use: {
+                    loader: "babel-loader"
+                },
+                exclude: /node_modules/
             }
         ]
     },
