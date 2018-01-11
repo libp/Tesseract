@@ -49,7 +49,7 @@ $(function() {
         classify_bln_numeric_mode: 1
     }).then(function (result) {
         console.log(result.text);
-        vc = result.text;
+        vc = result.text.replace(/\s|\xA0/g,"");
         $('#institute').val('00010000');
         $('#validateCode').val(vc);
         // console.table($(":submit"));
@@ -58,11 +58,8 @@ $(function() {
         });
     });
 
-
-
-
-
 });
+
 
 
 
